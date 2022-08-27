@@ -65,4 +65,15 @@ public class Filme {
     public Set<Categoria> getCategorias() {
         return categorias;
     }
+
+    @Override
+    public String toString() {
+        return "Filme{" +
+                "filmeID=" + filmeID +
+                ", nome='" + nome + '\'' +
+                ", sinopse='" + sinopse + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", categorias=" + categorias +
+                '}';
+    }
 }

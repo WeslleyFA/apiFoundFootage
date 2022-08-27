@@ -22,9 +22,9 @@ public class FilmeController {
         return ResponseEntity.ok().body(filmes);
     }
 
-    @PostMapping("/filtra")
-    private ResponseEntity<List<Filme>> descobreFilme(@RequestBody List<Long> categoriasIDs){
-        List<Filme> filmes = filmeService.descobreFilme(categoriasIDs);
-        return ResponseEntity.ok().body(filmes);
+    @PostMapping("/recomenda")
+    private ResponseEntity<Filme> descobreFilme(@RequestBody List<Long> categoriasIDs){
+        Filme filme = filmeService.descobreFilme(categoriasIDs);
+        return ResponseEntity.ok().body(filme);
     }
 }

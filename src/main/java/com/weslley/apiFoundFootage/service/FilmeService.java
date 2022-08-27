@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FilmeService {
@@ -23,8 +25,22 @@ public class FilmeService {
         return repository.findAll();
     }
 
-    public List<Filme> descobreFilme(List<Long> categoriasIDs){
-        return repository.fimesPorCategorias(categoriasIDs);
+    public Filme descobreFilme(List<Long> categoriasIDs){
+        List<Filme> filmes = repository.fimesPorCategorias(categoriasIDs);
+
+        int qtdMatch = 0;
+
+        Filme filmeEscolhido = new Filme();
+
+        Map<Filme, Long> collect = filmes.stream().collect(Collectors.groupingBy(filme -> filme, Collectors.counting()));
+        for (Map.Entry<Filme, Long> f : collect.entrySet()){
+            if(qtdMatch < f.getValue()){
+                filmeEscolhido = f.getKey();
+                qtdMatch = f.getValue().intValue();
+            }
+        }
+
+        return filmeEscolhido;
     }
 
 }
