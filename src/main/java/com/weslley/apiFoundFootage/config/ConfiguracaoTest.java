@@ -30,6 +30,8 @@ public class ConfiguracaoTest implements CommandLineRunner {
         categoriaRepository.saveAll(Arrays.asList(c1,c2));
 
         Filme filme = new Filme(null, "Teste", "Desc teste", "Teste");
+
+        filme.getCategorias().addAll(Arrays.asList(c1,c2));
         filmeRepository.save(filme);
     }
 

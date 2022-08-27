@@ -1,5 +1,6 @@
 package com.weslley.apiFoundFootage.service;
 
+import com.weslley.apiFoundFootage.entities.Categoria;
 import com.weslley.apiFoundFootage.entities.Filme;
 import com.weslley.apiFoundFootage.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,8 @@ public class FilmeService {
         return repository.findAll();
     }
 
+    public List<Filme> descobreFilme(List<Long> categoriasIDs){
+        return repository.fimesPorCategorias(categoriasIDs);
+    }
 
 }

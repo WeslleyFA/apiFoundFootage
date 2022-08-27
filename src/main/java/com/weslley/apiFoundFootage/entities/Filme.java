@@ -62,7 +62,7 @@ public class Filme {
     }
 
 
-    public void setCategorias(Set<Categoria> categorias) {
-        this.categorias = categorias;
+    public Set<Categoria> getCategorias() {
+        return categorias;
     }
 }
