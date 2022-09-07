@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/filme")
+@CrossOrigin("*")
 public class FilmeController {
 
     @Autowired
@@ -22,9 +23,22 @@ public class FilmeController {
         return ResponseEntity.ok().body(filmes);
     }
 
-    @PostMapping("/recomenda")
-    private ResponseEntity<Filme> descobreFilme(@RequestBody List<Long> categoriasIDs){
-        Filme filme = filmeService.descobreFilme(categoriasIDs);
+    @GetMapping("/{filmeID}")
+    private ResponseEntity<Filme> findById(@PathVariable Long filmeID){
+        Filme filme = filmeService.findById(filmeID);
         return ResponseEntity.ok().body(filme);
+    }
+
+    @PostMapping("/recomenda")
+    private ResponseEntity<Long> descobreFilme(@RequestBody List<Long> categoriasIDs){
+
+        Filme filme = filmeService.descobreFilme(categoriasIDs);
+        return ResponseEntity.ok().body(filme.getFilmeID());
+    }
+
+    @PostMapping()
+    private ResponseEntity<Filme> postFilme(@RequestBody Filme filme){
+        Filme novoFilme = filmeService.save(filme);
+        return ResponseEntity.ok().body(novoFilme);
     }
 }

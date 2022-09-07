@@ -43,4 +43,8 @@ public class FilmeService {
         return filmeEscolhido;
     }
 
+    public Filme save(Filme filme){
+        return repository.save(filme);
+    }
+
 }
