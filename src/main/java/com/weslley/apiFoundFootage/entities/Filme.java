@@ -14,7 +14,6 @@ public class Filme {
     private String sinopse;
     private String imgUrl;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "Filme_Categorias")
     private Set<Categoria> categorias = new HashSet<>();

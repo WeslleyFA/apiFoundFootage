@@ -14,6 +14,7 @@ public class Categoria {
     private Long categoriaID;
     private String descricao;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "categorias")
     private Set<Filme> filmes = new HashSet<>();
     public Categoria() {
