@@ -7,6 +7,7 @@ import com.weslley.apiFoundFootage.service.FilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.ServletResponseMethodArgumentResolver;
 
 import java.util.List;
 
@@ -22,5 +23,11 @@ public class CategoriaController {
     private ResponseEntity<List<Categoria>> findAll(){
         List<Categoria> categorias = categoriaService.findAll();
         return ResponseEntity.ok().body(categorias);
+    }
+
+    @PostMapping
+    private ResponseEntity<Categoria> save(@RequestBody Categoria categoria){
+        Categoria novaCategoria = categoriaService.save(categoria);
+        return ResponseEntity.ok().body(novaCategoria);
     }
 }
