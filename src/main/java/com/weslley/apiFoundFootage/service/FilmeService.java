@@ -6,9 +6,7 @@ import com.weslley.apiFoundFootage.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,17 +28,18 @@ public class FilmeService {
 
         int qtdMatch = 0;
 
-        Filme filmeEscolhido = new Filme();
+        List<Filme> filmesEscolhidos = new ArrayList<>();
 
         Map<Filme, Long> collect = filmes.stream().collect(Collectors.groupingBy(filme -> filme, Collectors.counting()));
         for (Map.Entry<Filme, Long> f : collect.entrySet()){
-            if(qtdMatch < f.getValue()){
-                filmeEscolhido = f.getKey();
+            if(qtdMatch <= f.getValue()){
+                filmesEscolhidos.add(f.getKey());
                 qtdMatch = f.getValue().intValue();
+
             }
         }
-
-        return filmeEscolhido;
+        Collections.shuffle(filmesEscolhidos);
+        return filmesEscolhidos.get(0);
     }
 
     public Filme save(Filme filme){
