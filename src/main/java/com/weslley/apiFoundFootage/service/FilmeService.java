@@ -32,10 +32,13 @@ public class FilmeService {
 
         Map<Filme, Long> collect = filmes.stream().collect(Collectors.groupingBy(filme -> filme, Collectors.counting()));
         for (Map.Entry<Filme, Long> f : collect.entrySet()){
-            if(qtdMatch <= f.getValue()){
+            if(qtdMatch < f.getValue()){
+                filmesEscolhidos.clear();
                 filmesEscolhidos.add(f.getKey());
                 qtdMatch = f.getValue().intValue();
-
+            }else if(qtdMatch == f.getValue()){
+                filmesEscolhidos.add(f.getKey());
+                qtdMatch = f.getValue().intValue();
             }
         }
         Collections.shuffle(filmesEscolhidos);
