@@ -45,8 +45,9 @@ public class FilmeService {
         return filmesEscolhidos.get(0);
     }
 
-    public Filme save(Filme filme){
+    public Filme saveOrUpdate(Filme filme){
         return repository.save(filme);
     }
+
 
 }

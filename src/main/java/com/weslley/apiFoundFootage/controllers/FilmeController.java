@@ -38,7 +38,14 @@ public class FilmeController {
 
     @PostMapping()
     private ResponseEntity<Filme> saveFilme(@RequestBody Filme filme){
-        Filme novoFilme = filmeService.save(filme);
+        Filme novoFilme = filmeService.saveOrUpdate(filme);
         return ResponseEntity.ok().body(novoFilme);
     }
+
+    @PutMapping()
+    private ResponseEntity<Filme> updateFilme(@RequestBody Filme filme){
+        Filme filmeAtualizado = filmeService.saveOrUpdate(filme);
+        return ResponseEntity.ok().body(filmeAtualizado);
+    }
+
 }
