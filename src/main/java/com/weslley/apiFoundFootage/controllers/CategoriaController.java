@@ -30,4 +30,10 @@ public class CategoriaController {
         Categoria novaCategoria = categoriaService.save(categoria);
         return ResponseEntity.ok().body(novaCategoria);
     }
+
+    @PutMapping
+    private ResponseEntity<Categoria> update(@RequestBody Categoria categoria){
+        Categoria categoriaAtualizada = categoriaService.update(categoria);
+        return ResponseEntity.ok().body(categoriaAtualizada);
+    }
 }

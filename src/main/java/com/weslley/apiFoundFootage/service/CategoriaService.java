@@ -4,9 +4,11 @@ import com.weslley.apiFoundFootage.entities.Categoria;
 import com.weslley.apiFoundFootage.entities.Filme;
 import com.weslley.apiFoundFootage.repository.CategoriaRepository;
 import com.weslley.apiFoundFootage.repository.FilmeRepository;
+import com.weslley.apiFoundFootage.service.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,6 +26,16 @@ public class CategoriaService {
 
     public Categoria save(Categoria categoria){
         return repository.save(categoria);
+    }
+
+    public Categoria update(Categoria categoriaAtualizada){
+        try {
+            Categoria categoria = repository.getOne(categoriaAtualizada.getCategoriaID());
+            categoria.setDescricao(categoriaAtualizada.getDescricao());
+            return categoria;
+        }catch (EntityNotFoundException e){
+            throw new NotFoundException(categoriaAtualizada);
+        }
     }
 
 

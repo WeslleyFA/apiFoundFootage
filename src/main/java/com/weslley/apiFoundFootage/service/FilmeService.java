@@ -3,9 +3,11 @@ package com.weslley.apiFoundFootage.service;
 import com.weslley.apiFoundFootage.entities.Categoria;
 import com.weslley.apiFoundFootage.entities.Filme;
 import com.weslley.apiFoundFootage.repository.FilmeRepository;
+import com.weslley.apiFoundFootage.service.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,7 +18,7 @@ public class FilmeService {
 
     public Filme findById(Long filmeID){
         Optional<Filme> obj = repository.findById(filmeID);
-        return obj.get();
+        return obj.orElseThrow(() -> new NotFoundException(obj));
     }
 
     public List<Filme> findAll(){
@@ -45,8 +47,20 @@ public class FilmeService {
         return filmesEscolhidos.get(0);
     }
 
-    public Filme saveOrUpdate(Filme filme){
+    public Filme save(Filme filme){
         return repository.save(filme);
+    }
+
+    public Filme update(Filme filmeAtualizado){
+        try {
+            Filme filme = repository.getOne(filmeAtualizado.getFilmeID());
+            filme.setImgUrl(filmeAtualizado.getImgUrl());
+            filme.setNome(filmeAtualizado.getNome());
+            filme.setSinopse(filmeAtualizado.getSinopse());
+            return repository.save(filme);
+        }catch (EntityNotFoundException e){
+            throw new NotFoundException(filmeAtualizado);
+        }
     }
 
 
