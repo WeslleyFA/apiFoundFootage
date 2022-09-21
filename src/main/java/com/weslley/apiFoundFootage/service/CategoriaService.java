@@ -32,7 +32,7 @@ public class CategoriaService {
         try {
             Categoria categoria = repository.getOne(categoriaAtualizada.getCategoriaID());
             categoria.setDescricao(categoriaAtualizada.getDescricao());
-            return categoria;
+            return repository.save(categoria);
         }catch (EntityNotFoundException e){
             throw new NotFoundException(categoriaAtualizada);
         }
