@@ -13,4 +13,6 @@ public interface FilmeRepository extends JpaRepository<Filme, Long> {
             value = "select f from Filme f join f.categorias c where c.categoriaID in (?1) order by f.filmeID"
     )
     public List<Filme> fimesPorCategorias(List<Long> categoriasIDs);
+
+    public List<Filme> findByNomeContainsIgnoreCase(String nome);
 }
