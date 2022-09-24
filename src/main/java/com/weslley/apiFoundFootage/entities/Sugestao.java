@@ -14,7 +14,7 @@ public class Sugestao {
     private Instant dataCadastro;
 
     @Column(length = 500)
-    private String descrição;
+    private String descricao;
     private String sugeridoPor;
     private Boolean aprovado = false;
 
@@ -38,12 +38,12 @@ public class Sugestao {
         this.nomeFilme = nomeFilme;
     }
 
-    public String getDescrição() {
-        return descrição;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getSugeridoPor() {
